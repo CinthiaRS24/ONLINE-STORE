@@ -1,0 +1,24 @@
+.divMain{
+    display: flex;
+}
+
+#first-column{
+    width: 25%;
+}
+
+#first-column button{
+    display: block;
+}
+
+#result{
+    display: grid;
+    flex-direction: row;
+    justify-content: space-around;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+}
+
+img {
+    width: 90px;
+    height: 90px;
+}
