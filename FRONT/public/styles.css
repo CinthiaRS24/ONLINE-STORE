@@ -5,10 +5,16 @@
 #first-column-g{
     width: 25%;
     margin-left: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 #first-column button{
     display: block;
+    width: 50%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #e4f7e4;
 }
 
 #result{
@@ -38,12 +44,13 @@ img {
     margin-left: 30px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
+    color: white;
 }
 
 .navbar {
     padding-top: 12px;
     padding-bottom: 12px;
-    background-color: rgb(116, 209, 116);
+    background-color: #015701;
 }
 
 #result {
@@ -79,6 +86,7 @@ img {
     font-weight: bold;
     font-size: 17px;
     margin-top: 18px;
+    margin-bottom: 0px;
 }
 
 .divProducts{
@@ -100,4 +108,29 @@ img {
     font-weight: bold;
     margin-left: 20px;
     font-size: 13px;
+}
+
+#pagination {
+    justify-content: center;
+    display: flex;
+    margin-top: 23px;
+}
+
+#pagination button {
+    margin-right: 10px;
+    margin-left: 10px;
+    border-color: #015701;
+    color: #015701;
+}
+
+#reset{
+    width: 50%;
+    background-color: #015701;
+    color: white;
+}
+
+#btn-search {
+    color: white;
+    border-color: white
+
 }

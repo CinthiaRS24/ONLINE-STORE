@@ -88,6 +88,7 @@ function productsByName(name) {
     // Ocultar el contenido del div
     let result = document.getElementById('result');
     result.innerHTML = "";
+    let allProducts = [];
 
     fetch(`http://localhost:3050/products?name=${name}`)
         .then(r => r.json())
@@ -96,8 +97,12 @@ function productsByName(name) {
 
             response.forEach((p) =>{
                 let newDiv = productHtml(p);
-                result.innerHTML += newDiv
+                // result.innerHTML += newDiv;
+                allProducts.push(newDiv);
             })
+        })
+        .then(() => {
+            pagination(allProducts);
         })
         .catch(error => 
             console.log(error));  
