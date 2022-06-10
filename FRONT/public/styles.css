@@ -62,7 +62,7 @@ img {
 
 #name-card {
     text-align: center;
-    padding-top: 7px;
+    padding-top: 13px;
     padding-right: 3px;
     padding-left: 3px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -84,4 +84,20 @@ img {
 .divProducts{
     width: 316.23px;
     height: 221px;
+}
+
+#price-card{
+    margin-top: 10px;
+    color: rgb(14, 14, 145);
+    font-weight: bold;
+    margin-left: 20px;
+    margin-bottom: 3px;
+    font-size: 18px;
+}
+
+#dscto-card{
+    color: rgb(236, 39, 32);
+    font-weight: bold;
+    margin-left: 20px;
+    font-size: 13px;
 }
