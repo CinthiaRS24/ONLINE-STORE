@@ -20,6 +20,30 @@ const allProducts = async () => {
 
     return allProducts;
 }
+
+const allProductsOrderByName = async (orderByName) => {
+    let allProducts = await Product.findAll({
+        order: [
+            ["name", `${orderByName}`],
+        ],
+    })
+
+    allProducts = JSON.parse(JSON.stringify(allProducts));
+
+    return allProducts;
+}
+
+const allProductsOrderByPrice = async (orderByPrice) => {
+    let allProducts = await Product.findAll({
+        order: [
+            ["price", `${orderByPrice}`],
+        ],
+    })
+
+    allProducts = JSON.parse(JSON.stringify(allProducts));
+
+    return allProducts;
+}
    
 const productsByCategory = async (id) => {
     let productsByCategory = await Product.findAll({
@@ -65,7 +89,17 @@ router.get('/categories', async (req, res) => {
 
 // Para traer todos los productos
 router.get('/', async (req, res) => {
-    const result = await allProducts();
+    const {orderByName} = req.query;
+    const {orderByPrice} = req.query;
+
+
+    if(!orderByName && !orderByPrice) {
+        const result = await allProducts();
+        res.json(result);
+    }
+
+    const result = orderByName? await allProductsOrderByName(orderByName) : await allProductsOrderByPrice(orderByPrice);
+    
     console.log('result', result)
     res.json(result);
 })
