@@ -11,6 +11,10 @@ const sequelize = new Sequelize('bsale_test', 'bsale_test', 'bsale_test', {
   }
 })
 
+const {
+  DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
+} = process.env;
+
 
 const basename = path.basename(__filename);
 
