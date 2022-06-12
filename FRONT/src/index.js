@@ -135,18 +135,22 @@ reset.addEventListener('click', (e) => {
 
 
 // Botón search
-// const search = document.getElementById('input-search');
-// search.addEventListener('input', updateValue)
-// console.log('search1', search.value)
+const search = document.getElementById('input-search');
+search.addEventListener('input', updateValue)
+console.log('search1', search.value)
 
-// function updateValue(e) {
-//     search.value = e.target.value;
-// }
+function updateValue(e) {
+    search.value = e.target.value;
+}
 
-// const btnSearch = document.getElementById('btn-search');
-// btnSearch.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     productsByName(search.value)})
+const btnSearch = document.getElementById('btn-search');
+btnSearch.addEventListener('click', (e) => {
+    e.preventDefault();
+    nameOid = `&name=${search.value}`;
+    link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+    main(link);
+    console.log('Link', link)
+})
 
 
 
