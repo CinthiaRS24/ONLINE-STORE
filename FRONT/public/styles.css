@@ -161,3 +161,6 @@ img {
     background-color: #e4f7e4;
 }
 
+.div_hide {
+    opacity: 0;
+  }

@@ -1,3 +1,17 @@
+import swal from 'sweetalert';
+
+
+// let divPrincipal = document.getElementsByClassName('divMain');
+// let productsResult = document.getElementById('result');
+// let categoriesResult = document.getElementById('first-column');
+
+// while (productsResult.innerHTML === "" || categoriesResult.innerHTML === "") {
+//     divPrincipal.classList.add("div_hide");
+//     divPrincipal.innerHTML = "<p>LOADING</p>"
+// }
+
+
+
 function productHtml (product) {
     return `<div class="divProducts" id="${product.name}">
                 <p id="name-card">${product.name}</p>
@@ -11,19 +25,20 @@ function productHtml (product) {
 let page = 0;
 let nameOid = "&";
 let orderBy = "&";
-let link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+let url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
 
 
-function main(link) {
+function main(url) {
     let result = document.getElementById('result');
     result.innerHTML = "";
 
     const btnsPagination = document.getElementById('pagination')
     btnsPagination.innerHTML = "";
 
-    fetch(link)
+    fetch(url)
         .then(r => r.json())
         .then((response) => {
+            if(response.rows.length <= 0) return result.innerHTML = "<p>Product not found</p>"
             response.rows.forEach((p) =>{
                 let newDiv = productHtml(p);
                 result.innerHTML += newDiv
@@ -51,7 +66,7 @@ function main(link) {
         });
 }
 
-main(link)
+main(url)
 
 
 async function categories() {
@@ -70,8 +85,8 @@ async function categories() {
             botones.forEach(button => {
                 button.addEventListener('click', (e) => {
                     nameOid = `&id=${e.target['id']}`;
-                    link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`;
-                    main(link);
+                    url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`;
+                    main(url);
                 }) 
             })
         })
@@ -85,8 +100,8 @@ categories();
 
 function clickBtn(number) {
     page = number;
-    link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
-    main(link);
+    url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+    main(url);
 }
 
 
@@ -96,9 +111,9 @@ const btnOrderByName = Array.from(document.getElementById('btns-orderName').chil
 btnOrderByName.forEach(button => {
     button.addEventListener('click', (e) => {
         orderBy = `&orderByName=${e.target.innerHTML}`
-        link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
-        main(link);
-        console.log('Link', link)
+        url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+        main(url);
+        console.log('url', url)
     } 
 )})
 
@@ -108,14 +123,14 @@ const btnOrderByPrice = Array.from(document.getElementById('btns-orderPrice').ch
 btnOrderByPrice.forEach(button => {
     button.addEventListener('click', (e) => {
         orderBy = `&orderByPrice=${e.target.innerHTML}`
-        link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
-        main(link);
-        console.log('Link', link)
+        url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+        main(url);
+        console.log('url', url)
     } 
 )})
 
 
-// Botón Search
+// Botón Buscar
 const search = document.getElementById('input-search');
 search.addEventListener('input', updateValue)
 
@@ -126,19 +141,20 @@ function updateValue(e) {
 const btnSearch = document.getElementById('btn-search');
 btnSearch.addEventListener('click', (e) => {
     e.preventDefault();
+    if(search.value === "") return swal("Ten cuidado!", "Ingresa el nombre de un producto", "warning");
     nameOid = `&name=${search.value}`;
-    link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
-    main(link);
+    url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+    main(url);
 })
 
 
-// Botón Reset
+// Botón Reiniciar
 const reset = document.getElementById('reset');
 reset.addEventListener('click', (e) => {
     page = 0;
     nameOid = "&";
     orderBy = "&";
-    link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
-    main(link);
+    url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+    main(url);
     search.value = "";
 })

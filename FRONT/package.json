@@ -5,5 +5,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server"
+  },
+  "dependencies": {
+    "sweetalert": "^2.1.2"
   }
 }
