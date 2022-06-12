@@ -8,7 +8,6 @@ function productHtml (product) {
 }
 
 
-
 async function categories() {
     let result = document.getElementById('first-column');
 
@@ -24,7 +23,10 @@ async function categories() {
             const botones = Array.from(document.getElementById('first-column').children);
             botones.forEach(button => {
                 button.addEventListener('click', (e) => {
-                    productsByCategory(e.target['id']);
+                    nameOid = `&id=${e.target['id']}`
+                    link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+                    main(link);
+                    console.log('Link', link)
                 } 
             )})
            
@@ -36,51 +38,61 @@ async function categories() {
 categories();
 
 
-function allProducts() {
+
+let page = 0;
+let nameOid = "&";
+let orderBy = "&";
+let link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+
+
+function main(link) {
     let result = document.getElementById('result');
     result.innerHTML = "";
-    let allProducts = [];
 
-    fetch('http://localhost:3050/')
+    const btnsPagination = document.getElementById('pagination')
+    btnsPagination.innerHTML = "";
+
+    console.log('link', link)
+    fetch(link)
         .then(r => r.json())
         .then((response) => {
-            response.forEach((p) =>{
+            console.log('response', response)
+
+            response.rows.forEach((p) =>{
                 let newDiv = productHtml(p);
-                // result.innerHTML += newDiv
-                allProducts.push(newDiv);
+                result.innerHTML += newDiv
+            })   
+
+           
+            const total = response.page.count;
+            const pageNumbers = [];
+            for (let i = 0; i < Math.ceil(total/6); i++) {
+                pageNumbers.push(i + 1);   
+            }
+
+            pageNumbers.map((number) => {
+                return btnsPagination.innerHTML += `<button id="${number}">${number}</button>`
             })
+
+            const botones = Array.from(document.getElementById('pagination').children);
+            botones.forEach(button => {
+                button.addEventListener('click', (e) => {
+                clickBtn(`${e.target.id - 1}`);
+            })
+            }) 
         })
-        .then(() => {
-            pagination(allProducts);
-        })
-       
-        .catch(error => 
-            console.log(error));  
+
 }
 
-allProducts();
+main(link)
 
 
-function productsByCategory(id) {
-    // Ocultar el contenido del div
-    let result = document.getElementById('result');
-    result.innerHTML = "";
-    let allProducts = [];
-
-    fetch(`http://localhost:3050/productsByCategory?id=${id}`)
-        .then(r => r.json())
-        .then((response) => {
-            response.forEach((p) =>{
-                let newDiv = productHtml(p);
-                // result.innerHTML += newDiv;
-                allProducts.push(newDiv);
-            })
-        })
-        .then(() => {
-            pagination(allProducts);
-        })
-        .catch(error => 
-            console.log(error));  
+function clickBtn(number) {
+    page = number;
+    console.log('btnpage', page)
+    link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+    main(link);
+    console.log('Link2', link)
 }
 
 
@@ -112,84 +124,50 @@ function productsByName(name) {
 // Botón reset
 const reset = document.getElementById('reset');
 console.log('reset', reset)
-reset.addEventListener('click', allProducts)
+reset.addEventListener('click', (e) => {
+    page = 0;
+    nameOid = "&";
+    orderBy = "&";
+    link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+    main(link);
+    console.log('Link', link)
+})
 
 
 // Botón search
-const search = document.getElementById('input-search');
-search.addEventListener('input', updateValue)
-console.log('search1', search.value)
+// const search = document.getElementById('input-search');
+// search.addEventListener('input', updateValue)
+// console.log('search1', search.value)
 
-function updateValue(e) {
-    search.value = e.target.value;
-}
+// function updateValue(e) {
+//     search.value = e.target.value;
+// }
 
-const btnSearch = document.getElementById('btn-search');
-btnSearch.addEventListener('click', (e) => {
-    e.preventDefault();
-    productsByName(search.value)})
-
-
+// const btnSearch = document.getElementById('btn-search');
+// btnSearch.addEventListener('click', (e) => {
+//     e.preventDefault();
+//     productsByName(search.value)})
 
 
-function pagination (allProducts) {
-
-    const result = document.getElementById('result');
-    result.innerHTML = "";
-
-    // Cantidad de productos
-    const cantidadProductos = allProducts.length;
-
-    let currentPage = 1;
-    let productsPerPage = 6;
-
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
 
-    const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-    for (let i = 0; i < currentProducts.length; i++) {
-        result.innerHTML += currentProducts[i];
-        
-    }
+const btnOrderByName = Array.from(document.getElementById('btns-orderName').children);
+btnOrderByName.forEach(button => {
+    button.addEventListener('click', (e) => {
+        orderBy = `&orderByName=${e.target.innerHTML}`
+        link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+        main(link);
+        console.log('Link', link)
+    } 
+)})
 
-    const pageNumbers = [];
-
-    for (let i = 0; i < Math.ceil(cantidadProductos/productsPerPage); i++) {
-        pageNumbers.push(i + 1);
-        
-    }
-
-    const btnsPagination = document.getElementById('pagination')
-    btnsPagination.innerHTML = "";
-    pageNumbers.map((number) => {
-        return btnsPagination.innerHTML += `<button id="${number}">${number}</button>`
-    })
-
-    const botones = Array.from(document.getElementById('pagination').children);
-        botones.forEach(button => {
-            button.addEventListener('click', (e) => {
-                porPagina(e.target.id, allProducts);
-            } 
-        )})
-}
-
-
-function porPagina (number, allProducts) {
-    const result = document.getElementById('result');
-    result.innerHTML = "";
-
-    let currentPage = number;
-    let productsPerPage = 6;
-
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
-    for (let i = 0; i < currentProducts.length; i++) {
-        result.innerHTML += currentProducts[i];
-    }
-
-}
-
+const btnOrderByPrice = Array.from(document.getElementById('btns-orderPrice').children);
+btnOrderByPrice.forEach(button => {
+    button.addEventListener('click', (e) => {
+        orderBy = `&orderByPrice=${e.target.innerHTML}`
+        link = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+        main(link);
+        console.log('Link', link)
+    } 
+)})
