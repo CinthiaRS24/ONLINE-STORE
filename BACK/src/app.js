@@ -9,7 +9,7 @@ require('./db.js');
 const app = express();
 const cors = require("cors");
 
-app.name = 'API';
+app.name = 'BACK';
 
 app.use(cors());
 
