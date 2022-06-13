@@ -73,7 +73,7 @@ main(url)
 async function categories() {
     let result = document.getElementById('first-column');
 
-    await fetch('http://localhost:3050/categories')
+    await fetch('https://online-shop-rs.herokuapp.com/categories')
         .then(r => r.json())
         .then((response) => {
             response.forEach((c) =>{
@@ -86,7 +86,7 @@ async function categories() {
             botones.forEach(button => {
                 button.addEventListener('click', (e) => {
                     nameOid = `&id=${e.target['id']}`;
-                    url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`;
+                    url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`;
                     main(url);
                 }) 
             })
@@ -101,7 +101,7 @@ categories();
 
 function clickBtn(number) {
     page = number;
-    url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+    url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
     main(url);
 }
 
@@ -112,7 +112,7 @@ const btnOrderByName = Array.from(document.getElementById('btns-orderName').chil
 btnOrderByName.forEach(button => {
     button.addEventListener('click', (e) => {
         orderBy = `&orderByName=${e.target.innerHTML}`
-        url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+        url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
         main(url);
         console.log('url', url)
     } 
@@ -124,7 +124,7 @@ const btnOrderByPrice = Array.from(document.getElementById('btns-orderPrice').ch
 btnOrderByPrice.forEach(button => {
     button.addEventListener('click', (e) => {
         orderBy = `&orderByPrice=${e.target.innerHTML}`
-        url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+        url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
         main(url);
         console.log('url', url)
     } 
@@ -144,7 +144,7 @@ btnSearch.addEventListener('click', (e) => {
     e.preventDefault();
     if(search.value === "") return swal("Ten cuidado!", "Ingresa el nombre de un producto", "warning");
     nameOid = `&name=${search.value}`;
-    url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+    url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
     main(url);
 })
 
@@ -155,7 +155,7 @@ reset.addEventListener('click', (e) => {
     page = 0;
     nameOid = "&";
     orderBy = "&";
-    url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+    url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
     main(url);
     search.value = "";
 })
