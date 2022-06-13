@@ -1,3 +1,21 @@
+.navbar {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #015701;
+}
+
+.navbar-brand {
+    margin-left: 30px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    color: white;
+}
+
+.form-nav {
+    display: flex;
+    margin-right: 60px;
+}
+
 .divMain{
     display: flex;
 }
@@ -9,12 +27,59 @@
     flex-direction: column;
 }
 
+#title-categories{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 18px;
+    margin-bottom: 0px;
+}
+
+
 #first-column button{
     display: block;
     width: 50%;
     margin-top: 5px;
     margin-bottom: 5px;
     background-color: #e4f7e4;
+}
+
+#title-order{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 18px;
+    margin-bottom: 0px;
+}
+
+#orderName{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.btn-order{
+    margin-bottom: 7px;
+    margin-right: 8px;
+    width: 57px;
+    background-color: #e4f7e4;
+}
+
+#orderPrice{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#pagination {
+    justify-content: center;
+    display: flex;
+    margin-top: 23px;
+}
+
+#pagination button {
+    margin-right: 10px;
+    margin-left: 10px;
+    border-color: #015701;
+    color: #015701;
 }
 
 #result{
@@ -24,36 +89,6 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
     margin-right: 10px;
-}
-
-img {
-    width: 90px;
-    height: 90px;
-}
-
-.form-nav {
-    display: flex;
-    margin-right: 60px;
-}
-
-.form-control {
-    margin-right: 3px;
-}
-
-.navbar-brand {
-    margin-left: 30px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bold;
-    color: white;
-}
-
-.navbar {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    background-color: #015701;
-}
-
-#result {
     margin-top: 30px;
 }
 
@@ -62,9 +97,9 @@ img {
     border-radius: 5%;
 }
 
-#result div {
-    border: 2px solid #015701;
-    border-radius: 5%;
+.divProducts{
+    width: 316.23px;
+    height: 221px;
 }
 
 #name-card {
@@ -79,19 +114,8 @@ img {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-}
-
-#title-categories{
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    font-size: 17px;
-    margin-top: 18px;
-    margin-bottom: 0px;
-}
-
-.divProducts{
-    width: 316.23px;
-    height: 221px;
+    width: 90px;
+    height: 90px;
 }
 
 #price-card{
@@ -110,17 +134,13 @@ img {
     font-size: 13px;
 }
 
-#pagination {
-    justify-content: center;
-    display: flex;
-    margin-top: 23px;
+.form-control {
+    margin-right: 3px;
 }
 
-#pagination button {
-    margin-right: 10px;
-    margin-left: 10px;
-    border-color: #015701;
-    color: #015701;
+#btn-search {
+    color: white;
+    border-color: white
 }
 
 #reset{
@@ -130,37 +150,8 @@ img {
     margin-top: 15px;
 }
 
-#btn-search {
-    color: white;
-    border-color: white
 
-}
-
-#title-order{
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    font-size: 17px;
-    margin-top: 18px;
-    margin-bottom: 0px;
-}
-
-#orderName{
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-#orderPrice{
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.btn-order{
-    margin-bottom: 7px;
-    margin-right: 8px;
-    width: 57px;
-    background-color: #e4f7e4;
-}
 
 .div_hide {
     opacity: 0;
-  }
+}

@@ -1,6 +1,6 @@
 import swal from 'sweetalert';
 
-
+const API_BASE_URL = 'https://online-shop-rs.herokuapp.com'
 
 // let divPrincipal = document.getElementsByClassName('divMain');
 // let productsResult = document.getElementById('result');
@@ -26,7 +26,7 @@ function productHtml (product) {
 let page = 0;
 let nameOid = "&";
 let orderBy = "&";
-let url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
+let url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
 
 
 function main(url) {
@@ -52,7 +52,7 @@ function main(url) {
             }
 
             pageNumbers.map((number) => {
-                return btnsPagination.innerHTML += `<button id="${number}">${number}</button>`
+                return btnsPagination.innerHTML += `<button id="${number}" style="{${page} === ${number} ? {backgroundColor= "#280783", color= "white", borderColor:"white" , fontSize: "20px"} : undefined}">${number}</button>`
             })
 
             const botones = Array.from(document.getElementById('pagination').children);
@@ -73,11 +73,11 @@ main(url)
 async function categories() {
     let result = document.getElementById('first-column');
 
-    await fetch('https://online-shop-rs.herokuapp.com/categories')
+    await fetch(`${API_BASE_URL}/categories`)
         .then(r => r.json())
         .then((response) => {
             response.forEach((c) =>{
-                const newBtn = `<button id="${c.id}">${c.name}</button>`;
+                const newBtn = `<button id="${c.id}"  >${c.name}</button>`;
                 result.innerHTML += newBtn;
             })
         })
@@ -86,7 +86,7 @@ async function categories() {
             botones.forEach(button => {
                 button.addEventListener('click', (e) => {
                     nameOid = `&id=${e.target['id']}`;
-                    url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`;
+                    url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`;
                     main(url);
                 }) 
             })
@@ -101,7 +101,7 @@ categories();
 
 function clickBtn(number) {
     page = number;
-    url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
+    url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
     main(url);
 }
 
@@ -112,7 +112,7 @@ const btnOrderByName = Array.from(document.getElementById('btns-orderName').chil
 btnOrderByName.forEach(button => {
     button.addEventListener('click', (e) => {
         orderBy = `&orderByName=${e.target.innerHTML}`
-        url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
+        url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
         main(url);
         console.log('url', url)
     } 
@@ -124,7 +124,7 @@ const btnOrderByPrice = Array.from(document.getElementById('btns-orderPrice').ch
 btnOrderByPrice.forEach(button => {
     button.addEventListener('click', (e) => {
         orderBy = `&orderByPrice=${e.target.innerHTML}`
-        url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
+        url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
         main(url);
         console.log('url', url)
     } 
@@ -144,7 +144,7 @@ btnSearch.addEventListener('click', (e) => {
     e.preventDefault();
     if(search.value === "") return swal("Ten cuidado!", "Ingresa el nombre de un producto", "warning");
     nameOid = `&name=${search.value}`;
-    url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
+    url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
     main(url);
 })
 
@@ -155,7 +155,7 @@ reset.addEventListener('click', (e) => {
     page = 0;
     nameOid = "&";
     orderBy = "&";
-    url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
+    url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
     main(url);
     search.value = "";
 })
