@@ -2,16 +2,6 @@ import swal from 'sweetalert';
 
 const API_BASE_URL = 'https://online-shop-rs.herokuapp.com'
 
-// let divPrincipal = document.getElementsByClassName('divMain');
-// let productsResult = document.getElementById('result');
-// let categoriesResult = document.getElementById('first-column');
-
-// while (productsResult.innerHTML === "" || categoriesResult.innerHTML === "") {
-//     divPrincipal.classList.add("div_hide");
-//     divPrincipal.innerHTML = "<p>LOADING</p>"
-// }
-
-
 
 function productHtml (product) {
     return `<div class="divProducts" id="${product.name}">
@@ -24,14 +14,16 @@ function productHtml (product) {
 
 
 let page = 0;
-let nameOid = "&";
+let nameOrid = "&";
 let orderBy = "&";
-let url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
+let url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`
 
 
 function main(url) {
     let result = document.getElementById('result');
     result.innerHTML = "";
+
+    console.log('url', url);
 
     const btnsPagination = document.getElementById('pagination')
     btnsPagination.innerHTML = "";
@@ -85,8 +77,10 @@ async function categories() {
             const botones = Array.from(document.getElementById('first-column').children);
             botones.forEach(button => {
                 button.addEventListener('click', (e) => {
-                    nameOid = `&id=${e.target['id']}`;
-                    url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`;
+                    page = 0;
+                    nameOrid = `&id=${e.target['id']}`;
+                    url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
+                    
                     main(url);
                 }) 
             })
@@ -101,7 +95,7 @@ categories();
 
 function clickBtn(number) {
     page = number;
-    url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
+    url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`
     main(url);
 }
 
@@ -111,8 +105,9 @@ function clickBtn(number) {
 const btnOrderByName = Array.from(document.getElementById('btns-orderName').children);
 btnOrderByName.forEach(button => {
     button.addEventListener('click', (e) => {
-        orderBy = `&orderByName=${e.target.innerHTML}`
-        url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
+        orderBy = `&orderByName=${e.target.innerHTML}`;
+        page = 0;
+        url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
         main(url);
         console.log('url', url)
     } 
@@ -123,8 +118,9 @@ btnOrderByName.forEach(button => {
 const btnOrderByPrice = Array.from(document.getElementById('btns-orderPrice').children);
 btnOrderByPrice.forEach(button => {
     button.addEventListener('click', (e) => {
-        orderBy = `&orderByPrice=${e.target.innerHTML}`
-        url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
+        orderBy = `&orderByPrice=${e.target.innerHTML}`;
+        page = 0;
+        url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
         main(url);
         console.log('url', url)
     } 
@@ -143,8 +139,9 @@ const btnSearch = document.getElementById('btn-search');
 btnSearch.addEventListener('click', (e) => {
     e.preventDefault();
     if(search.value === "") return swal("Ten cuidado!", "Ingresa el nombre de un producto", "warning");
-    nameOid = `&name=${search.value}`;
-    url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
+    page = 0;
+    nameOrid = `&name=${search.value}`;
+    url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`
     main(url);
 })
 
@@ -153,9 +150,9 @@ btnSearch.addEventListener('click', (e) => {
 const reset = document.getElementById('reset');
 reset.addEventListener('click', (e) => {
     page = 0;
-    nameOid = "&";
+    nameOrid = "&";
     orderBy = "&";
-    url = `${API_BASE_URL}/products?page=${page}${nameOid}${orderBy}`
+    url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`
     main(url);
     search.value = "";
 })
