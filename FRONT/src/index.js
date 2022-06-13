@@ -1,5 +1,9 @@
 import swal from 'sweetalert';
+import dotenv from "dotenv";
 
+dotenv.config();
+
+axios.defaults.baseURL = process.env.APP_API || "http://localhost:3001";
 
 // let divPrincipal = document.getElementsByClassName('divMain');
 // let productsResult = document.getElementById('result');
