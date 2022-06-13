@@ -1,9 +1,6 @@
 import swal from 'sweetalert';
-import dotenv from "dotenv";
 
-dotenv.config();
 
-axios.defaults.baseURL = process.env.APP_API || "http://localhost:3001";
 
 // let divPrincipal = document.getElementsByClassName('divMain');
 // let productsResult = document.getElementById('result');
@@ -29,7 +26,7 @@ function productHtml (product) {
 let page = 0;
 let nameOid = "&";
 let orderBy = "&";
-let url = `http://localhost:3050/products?page=${page}${nameOid}${orderBy}`
+let url = `https://online-shop-rs.herokuapp.com/products?page=${page}${nameOid}${orderBy}`
 
 
 function main(url) {
