@@ -155,3 +155,7 @@
 .div_hide {
     opacity: 0;
 }
+
+.btnEscogido {
+    background-color: null;
+}

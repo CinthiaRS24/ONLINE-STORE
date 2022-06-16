@@ -23,8 +23,6 @@ function main(url) {
     let result = document.getElementById('result');
     result.innerHTML = "";
 
-    console.log('url', url);
-
     const btnsPagination = document.getElementById('pagination')
     btnsPagination.innerHTML = "";
 
@@ -44,7 +42,7 @@ function main(url) {
             }
 
             pageNumbers.map((number) => {
-                return btnsPagination.innerHTML += `<button id="${number}" style="{${page} === ${number} ? {backgroundColor= "#280783", color= "white", borderColor:"white" , fontSize: "20px"} : undefined}">${number}</button>`
+                return btnsPagination.innerHTML += `<button id="${number}">${number}</button>`
             })
 
             const botones = Array.from(document.getElementById('pagination').children);
@@ -53,6 +51,11 @@ function main(url) {
                 clickBtn(`${e.target.id - 1}`);
                 })
             }) 
+
+            let selectedPage = Number(page) + 1;
+            let selectedBtn = document.getElementById(`${selectedPage}`);
+            selectedBtn.style.backgroundColor = "green";
+
         })
         .catch(error => {
             console.log(error)
@@ -62,14 +65,14 @@ function main(url) {
 main(url)
 
 
-async function categories() {
+function categories() {
     let result = document.getElementById('first-column');
 
-    await fetch(`${API_BASE_URL}/categories`)
+    fetch(`${API_BASE_URL}/categories`)
         .then(r => r.json())
         .then((response) => {
             response.forEach((c) =>{
-                const newBtn = `<button id="${c.id}"  >${c.name}</button>`;
+                const newBtn = `<button id="category-${c.id}"  >${c.name}</button>`;
                 result.innerHTML += newBtn;
             })
         })
@@ -77,8 +80,14 @@ async function categories() {
             const botones = Array.from(document.getElementById('first-column').children);
             botones.forEach(button => {
                 button.addEventListener('click', (e) => {
+                    deleteStylesCategories();
+
+                    let categoryId = e.target.id.slice(-1);
+                    let selectedCategory = document.getElementById(`category-${categoryId}`)
+                    selectedCategory.style.backgroundColor = "green";
+
                     page = 0;
-                    nameOrid = `&id=${e.target['id']}`;
+                    nameOrid = `&id=${categoryId}`;
                     url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
                     
                     main(url);
@@ -100,11 +109,15 @@ function clickBtn(number) {
 }
 
 
-
 // Botones ordenar por nombre
 const btnOrderByName = Array.from(document.getElementById('btns-orderName').children);
 btnOrderByName.forEach(button => {
     button.addEventListener('click', (e) => {
+        deleteStylesOrder();
+
+        let btn = document.getElementById(`name-${e.target.innerHTML}`);
+        btn.style.backgroundColor = "green";
+
         orderBy = `&orderByName=${e.target.innerHTML}`;
         page = 0;
         url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
@@ -118,6 +131,11 @@ btnOrderByName.forEach(button => {
 const btnOrderByPrice = Array.from(document.getElementById('btns-orderPrice').children);
 btnOrderByPrice.forEach(button => {
     button.addEventListener('click', (e) => {
+        deleteStylesOrder();
+
+        let btn = document.getElementById(`price-${e.target.innerHTML}`);
+        btn.style.backgroundColor = "green";
+
         orderBy = `&orderByPrice=${e.target.innerHTML}`;
         page = 0;
         url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
@@ -149,6 +167,8 @@ btnSearch.addEventListener('click', (e) => {
 // Botón Reiniciar
 const reset = document.getElementById('reset');
 reset.addEventListener('click', (e) => {
+    deleteStylesCategories();
+    deleteStylesOrder();
     page = 0;
     nameOrid = "&";
     orderBy = "&";
@@ -156,3 +176,27 @@ reset.addEventListener('click', (e) => {
     main(url);
     search.value = "";
 })
+
+
+// Para eliminar estilos de botón seleccionado (categorías)
+function deleteStylesCategories () {
+    let totalCategories = document.getElementById('first-column').children.length;
+    for (let i = 1; i <= totalCategories; i++) {
+        let category = document.getElementById(`category-${i}`)
+        category.style.background = null;
+    }
+}
+
+
+// Para eliminar estilos de botón seleccionado (forma de ordenar)
+function deleteStylesOrder () {
+    let nameAsc = document.getElementById('name-ASC')
+    let nameDesc = document.getElementById('name-DESC')
+    let priceAsc = document.getElementById('price-ASC')
+    let priceDesc = document.getElementById('price-DESC')
+
+    nameAsc.style.background = null;
+    nameDesc.style.background = null;
+    priceAsc.style.background = null;
+    priceDesc.style.background = null;
+}
