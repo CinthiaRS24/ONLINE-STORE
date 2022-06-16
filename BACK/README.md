@@ -10,7 +10,7 @@ Esta API permite llamadas del tipo REST y utiliza JSON para el envío y recepci�
 
 ## Herramientas útiles
 - Para realizar peticiones REST de forma sencilla pueden utilizar una extensión de un Cliente REST del Google Chrome, Postman, insomnia, etc.
-- Para ver los principales métodos que Sequelize pone a nuestra disposición, pueden revisar este [enlace](https://sequelize.org/docs/v6/core-concepts/model-querying-basics/)
+- Para ver los principales métodos que Sequelize pone a nuestra disposición, pueden revisar este [enlace](https://sequelize.org/docs/v6/core-concepts/model-querying-basics/).
 - Para procesar los ejemplos, utiliza postman.
 
 ## Lista de endpoints
