@@ -16,7 +16,7 @@ function productHtml (product) {
 let page = 0;
 let nameOrid = "&";
 let orderBy = "&";
-let url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`
+let url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
 
 
 function main(url) {
@@ -26,10 +26,13 @@ function main(url) {
     const btnsPagination = document.getElementById('pagination')
     btnsPagination.innerHTML = "";
 
+    showLoading(true);
+
     fetch(url)
         .then(r => r.json())
         .then((response) => {
-            if(response.rows.length <= 0) return result.innerHTML = "<p>Product not found</p>"
+            if(response.rows.length <= 0) return result.innerHTML = "<p>Product not found</p>";
+
             response.rows.forEach((p) =>{
                 let newDiv = productHtml(p);
                 result.innerHTML += newDiv
@@ -42,23 +45,26 @@ function main(url) {
             }
 
             pageNumbers.map((number) => {
-                return btnsPagination.innerHTML += `<button id="${number}">${number}</button>`
-            })
+                return btnsPagination.innerHTML += `<button id="${number}">${number}</button>`;
+            });
 
             const botones = Array.from(document.getElementById('pagination').children);
             botones.forEach(button => {
                 button.addEventListener('click', (e) => {
-                clickBtn(`${e.target.id - 1}`);
-                })
-            }) 
+                    clickBtn(`${e.target.id - 1}`);
+                });
+            }); 
 
             let selectedPage = Number(page) + 1;
             let selectedBtn = document.getElementById(`${selectedPage}`);
             selectedBtn.style.backgroundColor = "green";
 
+            showLoading(false);
+
         })
         .catch(error => {
-            console.log(error)
+            console.log(error);
+            showLoading(false);
         });
 }
 
@@ -122,7 +128,6 @@ btnOrderByName.forEach(button => {
         page = 0;
         url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
         main(url);
-        console.log('url', url)
     } 
 )})
 
@@ -140,7 +145,6 @@ btnOrderByPrice.forEach(button => {
         page = 0;
         url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
         main(url);
-        console.log('url', url)
     } 
 )})
 
@@ -157,6 +161,7 @@ const btnSearch = document.getElementById('btn-search');
 btnSearch.addEventListener('click', (e) => {
     e.preventDefault();
     if(search.value === "") return swal("Ten cuidado!", "Ingresa el nombre de un producto", "warning");
+    deleteStylesCategories();
     page = 0;
     nameOrid = `&name=${search.value}`;
     url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`
@@ -199,4 +204,14 @@ function deleteStylesOrder () {
     nameDesc.style.background = null;
     priceAsc.style.background = null;
     priceDesc.style.background = null;
+}
+
+function showLoading(status) {
+    let loading = document.getElementById('loading');
+
+    if(status === true) {
+        loading.classList.remove('div_hide');
+    } else {
+        loading.classList.add('div_hide');
+    }
 }
