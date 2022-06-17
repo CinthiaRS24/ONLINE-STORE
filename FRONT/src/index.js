@@ -31,7 +31,10 @@ function main(url) {
     fetch(url)
         .then(r => r.json())
         .then((response) => {
-            if(response.rows.length <= 0) return result.innerHTML = "<p>Product not found</p>";
+            if(response.rows.length <= 0) {
+                showLoading(false);
+                return result.innerHTML = "<p>Product not found</p>";
+            }
 
             response.rows.forEach((p) =>{
                 let newDiv = productHtml(p);
@@ -60,6 +63,7 @@ function main(url) {
             selectedBtn.style.backgroundColor = "green";
 
             showLoading(false);
+            btnSearch.disabled = false;
 
         })
         .catch(error => {
@@ -160,12 +164,14 @@ function updateValue(e) {
 const btnSearch = document.getElementById('btn-search');
 btnSearch.addEventListener('click', (e) => {
     e.preventDefault();
+    btnSearch.disabled = true;
     if(search.value === "") return swal("Ten cuidado!", "Ingresa el nombre de un producto", "warning");
     deleteStylesCategories();
     page = 0;
     nameOrid = `&name=${search.value}`;
     url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`
     main(url);
+    
 })
 
 
