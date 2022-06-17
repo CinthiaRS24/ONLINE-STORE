@@ -5,7 +5,7 @@
   },
   "scripts": {
     "dev": "webpack-dev-server",
-    "prod": "npx webpack"
+    "build": "npx webpack"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
