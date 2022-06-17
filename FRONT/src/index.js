@@ -169,7 +169,7 @@ btnSearch.addEventListener('click', (e) => {
     deleteStylesCategories();
     page = 0;
     nameOrid = `&name=${search.value}`;
-    url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`
+    url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
     main(url);
     
 })
