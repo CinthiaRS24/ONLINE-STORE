@@ -183,7 +183,7 @@ reset.addEventListener('click', (e) => {
     page = 0;
     nameOrid = "&";
     orderBy = "&";
-    url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`
+    url = `${API_BASE_URL}/products?page=${page}${nameOrid}${orderBy}`;
     main(url);
     search.value = "";
 })
