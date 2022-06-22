@@ -33,7 +33,9 @@ function main(url) {
         .then((response) => {
             if(response.rows.length <= 0) {
                 showLoading(false);
-                return result.innerHTML = "<p>Product not found</p>";
+                result.innerHTML = "<p>Product not found</p>";
+                btnSearch.disabled = false;
+                return;
             }
 
             response.rows.forEach((p) =>{
