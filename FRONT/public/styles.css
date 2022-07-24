@@ -170,3 +170,151 @@
 .pagResult{
     display: block;
 }
+
+
+@media screen and (max-width: 700px) {
+
+    .navbar-brand {
+        font-size: 15px;
+        margin-left: 15px;
+    }
+
+    .form-nav {
+        margin-right: 15px;
+    }
+    
+    #input-search {
+        width: 130px;
+        font-size: 12px;
+        padding-right: 5px;
+        padding-left: 5px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    #btn-search {
+        font-size: 13px;
+    }
+
+    #divMain {
+        display: block;
+    }
+
+    #first-column-g {
+        width: auto;
+        margin-left: 8px;
+        margin-right: 8px;
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #title-categories {
+        font-size: 15px;
+        margin-top: 5px;
+    }
+
+    #title-order{
+        font-size: 15px;
+        margin-top: 15px;
+    }
+
+    #first-column {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    #first-column button {
+        font-size: 12px;
+        width: auto;
+    }
+
+    #result{
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 15px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #pagination button {
+        margin-right: auto;
+        margin-left: auto;
+        font-size: 14px;
+    }
+
+    .divBody {
+        width: 100%;
+    }
+
+    .divProducts {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #orderName{
+        font-weight: normal;
+        font-size: 14px;
+        margin-right: 8px;
+    }
+    
+    .btn-order{
+        font-size: 11px;
+        width: 57px;
+        background-color: #e4f7e4;
+    }
+    
+    #orderPrice{
+        font-weight: normal;
+        font-size: 14px;
+        margin-right: 21px;
+    }
+
+    .divName {
+        display: flex;
+    }
+
+    .divPrice {
+        display: flex;
+    }
+
+    #reset{
+        width: 50%;
+        font-size: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+    #name-card {
+        font-size: 15px;    
+    }
+
+    #img-card{
+        width: 80px;
+        height: 80px;
+    }
+    
+    #price-card{
+        font-size: 16px;
+    }
+
+    #dscto-card{
+        font-size: 12px;
+    }
+
+    #loading {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        justify-content: center;
+    }
+
+    #imgLoading {
+        width: 200px;
+        height: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 100px;
+    }
+}

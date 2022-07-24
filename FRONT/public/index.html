@@ -14,7 +14,7 @@
     <a class="navbar-brand">ONLINE STORE</a>
     <form class="form-nav">
       <input class="form-control mr-sm-2" id="input-search" type="search" placeholder="Busca un producto..." aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" id="btn-search" type="submit">Buscar</button>
+      <button class="btn btn-outline-success my-2 my-sm-0 btn-ml" id="btn-search" type="submit">Buscar</button>
     </form>
   </nav>
 
@@ -26,17 +26,23 @@
       </div>
 
       <p id="title-order">ORDENAR POR</p>
-      <p id="orderName">Nombre:</p>
+
+      <div class="divName">
+        <p id="orderName">Nombre:</p>
         <div id="btns-orderName">
           <button class="btn-order" id="name-ASC">ASC</button>
           <button class="btn-order" id="name-DESC">DESC</button>
         </div>
-
-      <p id="orderPrice">Precio:</p>
+      </div>
+      
+      <div class="divPrice">
+        <p id="orderPrice">Precio:</p>
         <div id="btns-orderPrice">
           <button class="btn-order" id="price-ASC">ASC</button>
           <button class="btn-order" id="price-DESC">DESC</button>
         </div>
+      </div>
+      
 
 
       <button id="reset">REINICIAR</button>
