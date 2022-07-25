@@ -5,3 +5,6 @@ Este proyecto ha sido realizado como solución a un ejercicio propuesto para un 
 ## NOTA:
 Encontrarán la **DOCUMENTACIÓN** detallada de [Frontend](https://github.com/CinthiaRS24/ONLINE-STORE/tree/main/FRONT) y [Backend](https://github.com/CinthiaRS24/ONLINE-STORE/tree/main/BACK) en sus respectivas carpetas.
 
+## Prueba la aplicación:
+https://online-store-dun.vercel.app/
+
