@@ -31,3 +31,7 @@ Se procedió a implementar puntos a mejorar en la aplicación cliente:
 - Se corrigió el defecto de deformación de cards de productos agregando un ancho y alto fijo.
 - Se muestra un mensaje de advertencia al intentar realizar una búsqueda de productos sin ingresar texto.
 - Al presionar el botón reiniciar se limpia lo ingresado en la búsqueda y se elimina lo que se seleccionó en el filtrado.
+
+## Vista
+![image](https://user-images.githubusercontent.com/96211574/180867028-d3ee19e5-2232-445c-b157-569b04f8b318.png)
+
